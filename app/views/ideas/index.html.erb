@@ -10,7 +10,9 @@
 <div class="ideas">
   <% @ideas.each do |idea|%>
     <div class="idea">
-      <h1><%= idea.title %></h1>
+      <h1><%= idea.title %>   <button type="button" class="btn btn-danger delete" id="idea-<%= idea.id %>">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </button></h1>
       <p><%= "#{idea.quality} idea, created on: #{idea.created_at}" %></p>
       <p><%= idea.short_body %></p>
     </div>
