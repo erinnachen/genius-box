@@ -10,7 +10,11 @@ RSpec.describe Idea, type: :model do
     expect(idea.quality).to eq "meh"
   end
 
-  xit "should return ideas sorted by newly created" do
+  it "should return ideas sorted by newly created" do
+    idea1 = create(:idea, created_at: Date.new(2015, 01, 03))
+    idea2 = create(:idea, created_at: Date.new(2016, 04, 18))
+    ideas = Idea.all
 
+    expect(ideas.first).to eq idea2
   end
 end
