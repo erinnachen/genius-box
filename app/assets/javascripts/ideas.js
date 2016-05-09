@@ -5,8 +5,17 @@ $(document).ready(function() {
     clearTextFields();
   });
 
+  $(".ideas").on("click", ".delete", function(event){
+    var id = this.id.replace(/idea-/,'');
+
+    $.ajax({ type: "DELETE",
+             url: '/api/v1/ideas/'+id,
+             success: function() {$('#idea-'+id).parent().parent().remove()}
+            });
+  });
+
   function renderIdea(idea) {
-    return $('<div><h1>' + idea.title + '</h1><p>' + idea.quality +
+    return $('<div><h1>' + idea.title + '   <button type=\"button\" class=\"btn btn-danger delete\" id=\"idea-'+ idea.id + '\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></button></h1><p>' + idea.quality +
               ' idea, created on: ' + idea.created_at + '</p><p>' + idea.short_body +'</p></div>').addClass('idea');
   }
 
@@ -19,4 +28,5 @@ $(document).ready(function() {
     $('#idea_title').val('');
     $('#idea_body').val('');
   }
+
 });
