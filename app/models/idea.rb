@@ -5,4 +5,8 @@ class Idea < ActiveRecord::Base
   enum quality: [:meh, :plausible, :genius]
 
   default_scope { order(created_at: :desc) }
+
+  def short_body
+    body[0..99]
+  end
 end

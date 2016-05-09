@@ -17,4 +17,9 @@ RSpec.describe Idea, type: :model do
 
     expect(ideas.first).to eq idea2
   end
+
+  it "should have a shortened body of 100 characters or less" do
+    idea = Idea.new(title: "New idea", body: "*"*125)
+    expect(idea.short_body).to eq "*"*100
+  end
 end
