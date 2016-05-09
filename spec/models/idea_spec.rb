@@ -9,4 +9,8 @@ RSpec.describe Idea, type: :model do
     idea = Idea.new(title: "New idea", body: "Another thought")
     expect(idea.quality).to eq "meh"
   end
+
+  xit "should return ideas sorted by newly created" do
+
+  end
 end
