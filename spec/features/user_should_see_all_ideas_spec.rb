@@ -9,10 +9,10 @@ RSpec.feature "user sees all ideas on root page" do
     visit '/'
 
     within(".ideas") do
-      expect(first("li")).to have_content idea.title
-      expect(first("li")).to have_content idea.body[0...100]
-      expect(first("li")).to_not have_content idea.body
-      expect(first("li")).to have_content "genius"
+      expect(first(".idea")).to have_content idea.title
+      expect(first(".idea")).to have_content idea.body[0...100]
+      expect(first(".idea")).to_not have_content idea.body
+      expect(first(".idea")).to have_content "genius"
     end
   end
 end

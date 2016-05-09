@@ -1,9 +1,18 @@
+<div class="new-idea">
+  <%= form_for Idea.new, url: api_v1_ideas_path, method: :post, remote: true do |f|%>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+    <%= f.submit "Save it!" %>
+  <% end %>
+</div>
 <div class="ideas">
   <% @ideas.each do |idea|%>
-    <li>
+    <div class="idea">
       <h1><%= idea.title %></h1>
       <p><%= "#{idea.quality} idea, created on: #{idea.created_at}" %></p>
       <p><%= idea.short_body %></p>
-    </li>
+    </div>
   <% end %>
 </div>
