@@ -1,0 +1,9 @@
+<div class="ideas">
+  <% @ideas.each do |idea|%>
+    <li>
+      <h1><%= idea.title %></h1>
+      <p><%= "#{idea.quality} idea, created on: #{idea.created_at}" %></p>
+      <p><%= idea.short_body %></p>
+    </li>
+  <% end %>
+</div>
