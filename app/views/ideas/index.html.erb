@@ -10,10 +10,13 @@
 <div class="ideas">
   <% @ideas.each do |idea|%>
     <div class="idea">
-      <h1><%= idea.title %>   <button type="button" class="btn btn-danger delete" id="idea-<%= idea.id %>">
+      <h1><%= idea.title %>   <button type="button" class="btn btn-default upvote" id="idea-upvote<%= idea.id %>">
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+      </button>  <button type="button" class="btn btn-danger delete" id="idea-<%= idea.id %>">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       </button></h1>
-      <p><%= "#{idea.quality} idea, created on: #{idea.created_at}" %></p>
+      <p><%= "#{idea.quality} idea" %></p>
+      <p><%= "created on: #{idea.created_at}" %></p>
       <p><%= idea.short_body %></p>
     </div>
   <% end %>
