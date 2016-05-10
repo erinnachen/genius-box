@@ -18,6 +18,11 @@ class Api::V1::IdeasController < Api::V1::BaseController
     respond_with :api, :v1, @idea.update(quality: @idea.plus_one)
   end
 
+  def downvote
+    @idea = Idea.find(params[:id])
+    respond_with :api, :v1, @idea.update(quality: @idea.minus_one)
+  end
+
 
   private
 
