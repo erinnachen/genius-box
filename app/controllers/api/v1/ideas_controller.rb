@@ -13,6 +13,10 @@ class Api::V1::IdeasController < Api::V1::BaseController
     respond_with :nothing, status: 204 if Idea.delete(params[:id])
   end
 
+  def update
+    respond_with :api, :v1, Idea.update(params[:id], idea_params)
+  end
+
   def upvote
     @idea = Idea.find(params[:id])
     respond_with :api, :v1, @idea.update(quality: @idea.plus_one)
