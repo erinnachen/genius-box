@@ -23,6 +23,15 @@ $(document).ready(function() {
             });
   });
 
+  $(".ideas").on("click", ".downvote", function(event){
+    var id = this.id.replace(/idea-downvote/,'');
+
+    $.ajax({ type: "PATCH",
+             url: '/api/v1/ideas/'+id+'/downvote',
+             success: function() { update(id) }
+            });
+  });
+
   function renderIdea(idea) {
     return $('<div><h1>' + idea.title + '   <button type=\"button\" class=\"btn btn-danger delete\" id=\"idea-'+ idea.id + '\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></button></h1><p>' + idea.quality +
               ' idea, created on: ' + idea.created_at + '</p><p>' + idea.short_body +'</p></div>').addClass('idea');

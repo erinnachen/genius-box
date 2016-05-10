@@ -15,4 +15,10 @@ class Idea < ActiveRecord::Base
     return qint+1 if qint < 2
     2
   end
+
+  def minus_one
+    qint = Idea.qualities[quality]
+    return qint-1 if qint > 0
+    0
+  end
 end

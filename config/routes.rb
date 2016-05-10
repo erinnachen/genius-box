@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :ideas, only: [:create, :show, :destroy] do
         member do
           patch "upvote"
+          patch "downvote"
         end
       end
     end
