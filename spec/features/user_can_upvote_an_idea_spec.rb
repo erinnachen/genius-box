@@ -28,6 +28,7 @@ RSpec.feature "user can upvote an idea", js: true do
     scenario "quality stays at 2" do
       idea = create(:idea, quality: 2)
       visit '/'
+      wait_for_ajax
 
       first(".upvote").click
       wait_for_ajax
