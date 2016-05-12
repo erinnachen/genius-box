@@ -7,7 +7,7 @@ RSpec.feature "user can upvote an idea", js: true do
       visit '/'
 
       first(".upvote").click
-      sleep 1
+      wait_for_ajax
 
       within(".idea") do
         expect(page).to have_content "plausible"
@@ -15,7 +15,15 @@ RSpec.feature "user can upvote an idea", js: true do
       end
 
       first(".upvote").click
-      sleep 1
+      wait_for_ajax
+
+      within(".idea") do
+        expect(page).to have_content "genius"
+        expect(page).to_not have_content "plausible"
+      end
+
+      visit '/'
+      wait_for_ajax
 
       within(".idea") do
         expect(page).to have_content "genius"
@@ -28,9 +36,17 @@ RSpec.feature "user can upvote an idea", js: true do
     scenario "quality stays at 2" do
       idea = create(:idea, quality: 2)
       visit '/'
+      wait_for_ajax
 
       first(".upvote").click
-      sleep 1
+      wait_for_ajax
+
+      within(".idea") do
+        expect(page).to have_content "genius"
+      end
+
+      visit '/'
+      wait_for_ajax
 
       within(".idea") do
         expect(page).to have_content "genius"

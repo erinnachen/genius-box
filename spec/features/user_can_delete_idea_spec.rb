@@ -12,7 +12,7 @@ RSpec.feature "User can delete an idea", js:true do
     end
 
     first(".delete").click
-    sleep 1
+    wait_for_ajax
 
     within(".ideas") do
      expect(page).to have_selector('.delete', count: 1)

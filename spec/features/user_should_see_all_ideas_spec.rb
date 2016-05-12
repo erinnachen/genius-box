@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-RSpec.feature "user sees all ideas on root page" do
+RSpec.feature "user sees all ideas on root page", js: true do
   scenario "sees all ideas, body limited to 100 characters, sorted by date" do
     ideas = []
     3.times { |n| ideas[n] = create(:idea, created_at: Date.new(2016, 05, 01+n), quality: n) }
     idea = ideas.last
 
     visit '/'
+    wait_for_ajax
 
     within(".ideas") do
       expect(first(".idea")).to have_content idea.title

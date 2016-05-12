@@ -7,7 +7,7 @@ RSpec.feature "user can downvote an idea", js: true do
       visit '/'
 
       first(".downvote").click
-      sleep 1
+      wait_for_ajax
 
       within(".idea") do
         expect(page).to have_content "plausible"
@@ -15,13 +15,22 @@ RSpec.feature "user can downvote an idea", js: true do
       end
 
       first(".downvote").click
-      sleep 1
+      wait_for_ajax
+
+      within(".idea") do
+        expect(page).to have_content "meh"
+        expect(page).to_not have_content "plausible"
+      end
+
+      visit '/'
+      wait_for_ajax
 
       within(".idea") do
         expect(page).to have_content "meh"
         expect(page).to_not have_content "plausible"
       end
     end
+
   end
 
   context "quality is 0" do
@@ -30,7 +39,14 @@ RSpec.feature "user can downvote an idea", js: true do
       visit '/'
 
       first(".downvote").click
-      sleep 1
+      wait_for_ajax
+
+      within(".idea") do
+        expect(page).to have_content "meh"
+      end
+
+      visit '/'
+      wait_for_ajax
 
       within(".idea") do
         expect(page).to have_content "meh"
