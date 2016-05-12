@@ -1,3 +1,10 @@
+<div class="search">
+  <form>
+    <label for="idea_search">Search</label>
+    <input type="text" id="idea_search">
+  </form>
+</div>
+<br/>
 <div class="new-idea">
   <%= form_for Idea.new, url: api_v1_ideas_path, method: :post, remote: true do |f|%>
     <%= f.label :title %>
