@@ -1,6 +1,6 @@
 function createElementFromIdea(idea) {
   var newIdea =
-  $('<div class="idea"><h1><div class="idea-title" contentEditable="true">' +
+  $('<div class="idea"><h1><div class="idea-title idea-'+idea.id+'" contentEditable="true">' +
     idea.title + '</div>   '+
     '<button type="button" class="btn btn-default upvote" id="idea-upvote-'+
     idea.id+

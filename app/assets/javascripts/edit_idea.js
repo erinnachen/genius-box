@@ -1,60 +1,41 @@
 $(document).ready(function() {
 
   $('.ideas').on("click", ".idea-title", function() {
-    $(this).addClass("edit-title");
+    $(this).addClass("edit-idea");
   });
 
   $('.ideas').on("click", ".idea-body", function() {
-    $(this).addClass("edit-body");
+    $(this).addClass("edit-idea");
   });
 
   $( ".ideas" ).keydown(function(e) {
-    if ($(".edit-title").length > 0 && e.keyCode == 13) {
+    if ($(".edit-idea").length > 0 && e.keyCode == 13) {
       event.preventDefault();
-      $(".edit-title").blur();
-    } else if ($(".edit-body").length > 0 && e.keyCode == 13) {
-      event.preventDefault();
-      $(".edit-body").blur();
+      $(".edit-idea").blur();
     }
   });
 
   $( ".ideas" ).focusout(function(){
-      editTitleOnPageAndDb();
-      editBodyOnPageAndDb();
+      editIdea();
   });
 
-  function editTitleOnPageAndDb() {
-    var title = $(".edit-title")
-    if (title.length > 0) {
-      var id = $(title).siblings().last()[0].id;
-      id = id.replace(/idea-/,'');
-      title.removeClass("edit-title");
-      updateTitle(title[0].innerText, id);
+  function editIdea() {
+    var editing = $(".edit-idea")
+    if (editing.length > 0) {
+      var id = editing.prop('class').match(/\d+/)[0];
+      if (editing.prop('class').indexOf("title") !== -1) {
+        updateDb({"title": editing[0].innerText}, id);
+      } else {
+        updateDb({"body": editing[0].innerText}, id);
+      }
+      editing.removeClass("edit-idea");
     }
   }
 
-  function editBodyOnPageAndDb() {
-    var title = $(".edit-body");
-    if (title.length > 0) {
-      var id = $(title).prop("class").match(/\d+/)[0]
-      title.removeClass("edit-body");
-      updateBody(title[0].innerText, id);
-    }
-  };
-
-  function updateTitle(title, id) {
+  function updateDb(updateData, id) {
     $.ajax({type: "PATCH",
             url: '/api/v1/ideas/'+id,
-            data: {'idea': {'title': title}},
-            success: console.log("PATCHED THAT BAD ASS")
+            data: {'idea': updateData}
           });
-  };
-
-  function updateBody(body, id) {
-    $.ajax({type: "PATCH",
-            url: '/api/v1/ideas/'+id,
-            data: {'idea': {'body': body}},
-            success: console.log("PATCHED That BODY")
-          });
-  };
+  }
 });

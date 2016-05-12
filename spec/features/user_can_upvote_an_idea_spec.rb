@@ -21,6 +21,14 @@ RSpec.feature "user can upvote an idea", js: true do
         expect(page).to have_content "genius"
         expect(page).to_not have_content "plausible"
       end
+
+      visit '/'
+      wait_for_ajax
+
+      within(".idea") do
+        expect(page).to have_content "genius"
+        expect(page).to_not have_content "plausible"
+      end
     end
   end
 
@@ -31,6 +39,13 @@ RSpec.feature "user can upvote an idea", js: true do
       wait_for_ajax
 
       first(".upvote").click
+      wait_for_ajax
+
+      within(".idea") do
+        expect(page).to have_content "genius"
+      end
+
+      visit '/'
       wait_for_ajax
 
       within(".idea") do
