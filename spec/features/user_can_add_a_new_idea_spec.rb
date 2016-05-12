@@ -10,7 +10,7 @@ RSpec.feature "User can add a new idea", js:true do
     fill_in "Body", with: body
 
     click_on "Save it!"
-    sleep 1
+    wait_for_ajax
 
     within(".ideas") do
       expect(first(".idea")).to have_content "Another genius idea"
